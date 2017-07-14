@@ -1,0 +1,26 @@
+//-----------------------------------
+//--- 010 Editor v1.0 Script File
+//
+// File:     ScavengeReportingPoints.1sc
+// Author:   Arild M Johannessen
+// Revision: 0.1
+// Purpose:  Search through a text file
+//    to find combinations of position
+//    identifiers and Latitude Longitude
+//    pairs. Result is pasted in a new
+//    file.
+//-----------------------------------
+RequiresVersion( 4.0 );
+RequiresFile();
+
+// Define variables
+const int BLOCK_SIZE = 1024;
+uchar buffer[ BLOCK_SIZE ];
+quad  size, pos;
+int   sourceFile, destFile;
+
+sourceFile = GetFileNum();
+destFile = FileNew();
+
+Printf("%i", sourceFile);
+Printf("%i", destFile);
