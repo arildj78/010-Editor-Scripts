@@ -14,13 +14,14 @@ RequiresVersion( 4.0 );
 RequiresFile();
 
 // Define variables
-const int BLOCK_SIZE = 1024;
-uchar buffer[ BLOCK_SIZE ];
-quad  size, pos;
-int   sourceFile, destFile;
+const string RegDDMMSS = "\\b[a-zA-Z]{2}[\\w]{3}\\b[\\s]*\\b[\\d]{1,2}[ ]?[\\d]{2}[ ]?[\\d]{2}([.|,]\\d*)?[NnSs][ \\t\\-\\n\\r]*[\\d]{1,3}[ ]?[\\d]{2}[ ]?[\\d]{2}([.|,]\\d*)?[EeWw]\\b";
+const string RegDDMM   = "\\b[a-zA-Z]{2}[\\w]{3}\\b[\\s]*\\b[\\d]{1,2}[ ]?[\\d]{2}([.|,]\\d*)?[NnSs][ \\t\\-\\n\\r]*[\\d]{1,3}[ ]?[\\d]{2}([.|,]\\d*)?[EeWw]\\b";
+int   DestinationFile, size, i;
 
-sourceFile = GetFileNum();
-destFile = FileNew();
+TFindResults r = FindAll( "(" + RegDDMMSS + ")|(" + RegDDMM + ")", false, false, FINDMETHOD_REGEX );
 
-Printf("%i", sourceFile);
-Printf("%i", destFile);
+DestinationFile = FileNew("",0);
+
+for( i = 0; i < r.count; i++ )
+    FPrintf(DestinationFile, "%s\n", ReadString(r.start[i], r.size[i]) );
+
