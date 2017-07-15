@@ -25,3 +25,5 @@ DestinationFile = FileNew("",0);
 for( i = 0; i < r.count; i++ )
     FPrintf(DestinationFile, "%s\n", ReadString(r.start[i], r.size[i]) );
 
+FileSelect(DestinationFile);
+ReplaceAll("20,h", "09,h");
